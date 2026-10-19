@@ -14,10 +14,10 @@
 
 ## Crates
 
-| Crate | | What it does |
+| Crate | What it does | |
 | --- | --- | --- |
-| [`altcha-server`](crates/altcha-server) | [![crates.io](https://img.shields.io/crates/v/altcha-server?style=flat-square)](https://crates.io/crates/altcha-server) [![docs.rs](https://img.shields.io/docsrs/altcha-server?style=flat-square)](https://docs.rs/altcha-server) | Issues signed challenges and redeems each solution once, over a `ReplayStore`; an optional axum challenge handler |
-| [`dioxus-altcha`](crates/dioxus-altcha) | [![crates.io](https://img.shields.io/crates/v/dioxus-altcha?style=flat-square)](https://crates.io/crates/dioxus-altcha) [![docs.rs](https://img.shields.io/docsrs/dioxus-altcha?style=flat-square)](https://docs.rs/dioxus-altcha) | Solves challenges in the browser, with a `use_altcha` hook and an `AltchaField` form field |
+| [`altcha-server`](crates/altcha-server) | Issues signed challenges and redeems each solution once, over a `ReplayStore`; an optional axum challenge handler | [![crates.io](https://img.shields.io/crates/v/altcha-server?style=flat-square)](https://crates.io/crates/altcha-server) [![docs.rs](https://img.shields.io/docsrs/altcha-server?style=flat-square)](https://docs.rs/altcha-server) |
+| [`dioxus-altcha`](crates/dioxus-altcha) | Solves challenges in the browser, with a `use_altcha` hook and an `AltchaField` form field | [![crates.io](https://img.shields.io/crates/v/dioxus-altcha?style=flat-square)](https://crates.io/crates/dioxus-altcha) [![docs.rs](https://img.shields.io/docsrs/dioxus-altcha?style=flat-square)](https://docs.rs/dioxus-altcha) |
 
 ## Quick start
 
