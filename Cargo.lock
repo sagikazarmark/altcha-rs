@@ -24,7 +24,7 @@ dependencies = [
 
 [[package]]
 name = "altcha-server"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "altcha",
  "altcha-server",
@@ -298,7 +298,7 @@ dependencies = [
 
 [[package]]
 name = "dioxus-altcha"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "altcha",
  "base64",
