@@ -1,0 +1,57 @@
+[package]
+name = "demo"
+version = "0.0.0"
+description = "dioxus-altcha end to end: a Dioxus fullstack app that issues, solves and verifies proof-of-work challenges"
+edition = "2024"
+rust-version = "1.92"
+license = "MIT OR Apache-2.0"
+publish = false
+
+[features]
+default = []
+server = ["dep:altcha-server", "dep:getrandom", "dioxus/server"]
+web = [
+    "dep:js-sys",
+    "dep:wasm-bindgen-futures",
+    "dep:web-sys",
+    "dioxus/launch",
+    "dioxus/web",
+]
+
+[dependencies]
+altcha-server = { path = "../crates/altcha-server", optional = true }
+dioxus-altcha = { path = "../crates/dioxus-altcha" }
+
+dioxus = { version = "0.7.10", default-features = false, features = [
+    "asset",
+    "document",
+    "fullstack",
+    "hooks",
+    "html",
+    "macro",
+    "router",
+    "signals",
+] }
+# The server's HMAC key when ALTCHA_DEMO_KEY is unset.
+getrandom = { version = "0.2.17", optional = true }
+js-sys = { version = "0.3.106", optional = true }
+serde = { version = "1.0.229", features = ["derive"] }
+wasm-bindgen-futures = { version = "0.4.79", optional = true }
+web-sys = { version = "0.3.106", features = ["Location", "Window"], optional = true }
+
+[profile.release]
+opt-level = "z"
+debug = false
+lto = true
+codegen-units = 1
+panic = "abort"
+strip = true
+incremental = false
+
+# altcha's solve_challenge and verify_solution read std clocks, which panic on
+# wasm32-unknown-unknown, where the bench (/bench) solves and verifies. This
+# uses web-time (altcha-org/altcha-lib-rs#1). Drop it once released.
+[patch.crates-io]
+altcha = { git = "https://github.com/sagikazarmark/altcha-lib-rs", rev = "d2f9476826fe0965d687bed142e920ca2b91430a" }
+
+[workspace]

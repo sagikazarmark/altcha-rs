@@ -1,0 +1,39 @@
+[package]
+name = "altcha-server"
+version.workspace = true
+description = "Server side of ALTCHA v2 proof-of-work: issuing signed challenges and redeeming each solution once, over a replay store you provide"
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+keywords = ["altcha", "captcha", "proof-of-work", "axum"]
+categories = ["web-programming", "authentication"]
+
+[features]
+default = []
+## A challenge handler for axum.
+axum = ["dep:axum"]
+
+[dependencies]
+altcha = { workspace = true }
+axum = { version = "0.8.9", default-features = false, features = ["json"], optional = true }
+base64 = { workspace = true }
+serde_json = { workspace = true }
+thiserror = { workspace = true }
+# Clocks that work on wasm32-unknown-unknown (Cloudflare Workers) too.
+web-time = "1.1.0"
+
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+getrandom = { workspace = true }
+
+[dev-dependencies]
+altcha-server = { path = ".", features = ["axum"] }
+tokio = { workspace = true, features = ["macros", "rt"] }
+tower = { version = "0.5.3", default-features = false, features = ["util"] }
+
+[lints]
+workspace = true
+
+# The default build leaves out the `axum` module.
+[package.metadata.docs.rs]
+all-features = true
