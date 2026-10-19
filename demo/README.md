@@ -43,9 +43,6 @@ rustup target add wasm32-unknown-unknown
 cargo install dioxus-cli --version 0.7.10 --locked
 ```
 
-The demo patches `altcha` with [altcha-org/altcha-lib-rs#1](https://github.com/altcha-org/altcha-lib-rs/pull/1)
-(see `Cargo.toml`): the bench solves and verifies with `altcha`'s Rust in the browser, where std clocks panic.
-
 ## Run locally
 
 With devenv, from the repository root:

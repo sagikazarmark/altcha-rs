@@ -48,9 +48,9 @@ verifier.forget_expired(&store).await?;
 
 ## Cloudflare Workers
 
-`altcha`'s `verify_solution` reads std clocks, which panic on `wasm32-unknown-unknown`; patch in
-[altcha-org/altcha-lib-rs#1](https://github.com/altcha-org/altcha-lib-rs/pull/1) until it's released (see the
-[repository README](https://github.com/sagikazarmark/altcha-rs/blob/main/README.md#cloudflare-workers)). This crate's own clock reads use `web-time`.
+On `wasm32-unknown-unknown`, where std clocks panic, this crate reads the clock from `Date.now()` and turns on
+`altcha`'s `js` feature (`Date.now()` for clocks, `crypto.getRandomValues()` for randomness), so it runs on Workers as
+is.
 
 ## License
 

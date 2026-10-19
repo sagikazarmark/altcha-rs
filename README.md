@@ -10,7 +10,7 @@
 - **Compatible with the official widget:** challenges come from the official [`altcha`](https://crates.io/crates/altcha) crate, and the form value is the one the widget posts, so either side works with any ALTCHA v2 counterpart.
 - **Each solution once:** the server records every redeemed challenge's signed nonce in a replay store you provide, until the challenge expires.
 - **Off the main thread:** the browser solves on WebCrypto in Web Workers, falling back to the main thread when workers can't start.
-- **Runs on Cloudflare Workers:** clock reads go through `web-time`, so `wasm32-unknown-unknown` servers work (with the `altcha` patch below).
+- **Runs on Cloudflare Workers:** on `wasm32-unknown-unknown`, `altcha-server` reads the clock from `Date.now()` and turns on `altcha`'s `js` feature, which does the same, so Workers servers work as is.
 
 ## Crates
 
@@ -54,16 +54,6 @@ fn Join() -> Element {
         }
     }
 }
-```
-
-## Cloudflare Workers
-
-`altcha`'s `solve_challenge` and `verify_solution` read std clocks, which panic on `wasm32-unknown-unknown`.
-Until [altcha-org/altcha-lib-rs#1](https://github.com/altcha-org/altcha-lib-rs/pull/1) is released, patch it in the application:
-
-```toml
-[patch.crates-io]
-altcha = { git = "https://github.com/sagikazarmark/altcha-lib-rs", rev = "d2f9476826fe0965d687bed142e920ca2b91430a" }
 ```
 
 ## Demo

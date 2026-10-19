@@ -29,8 +29,9 @@ serde_json = { workspace = true, features = ["raw_value"] }
 thiserror = { workspace = true }
 
 [target.'cfg(target_arch = "wasm32")'.dependencies]
-# `altcha` is never called here in the browser, but still has to build there.
-getrandom = { workspace = true }
+# `altcha` is never called here in the browser, but still has to build there,
+# and the browser tests (wasm_solve) verify with it: JS clocks and randomness.
+altcha = { workspace = true, features = ["js"] }
 gloo-timers = { version = "0.4.0", features = ["futures"] }
 js-sys = "0.3.106"
 wasm-bindgen = "0.2.129"

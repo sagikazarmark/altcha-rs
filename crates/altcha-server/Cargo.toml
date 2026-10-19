@@ -20,11 +20,11 @@ axum = { version = "0.8.9", default-features = false, features = ["json"], optio
 base64 = { workspace = true }
 serde_json = { workspace = true }
 thiserror = { workspace = true }
-# Clocks that work on wasm32-unknown-unknown (Cloudflare Workers) too.
-web-time = "1.1.0"
 
-[target.'cfg(target_arch = "wasm32")'.dependencies]
-getrandom = { workspace = true }
+# Clocks (and `altcha`'s randomness) from JS on Cloudflare Workers.
+[target.'cfg(all(target_arch = "wasm32", target_os = "unknown"))'.dependencies]
+altcha = { workspace = true, features = ["js"] }
+js-sys = "0.3.106"
 
 [dev-dependencies]
 altcha-server = { path = ".", features = ["axum"] }

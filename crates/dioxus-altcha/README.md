@@ -72,12 +72,6 @@ Or by hand with `altcha`: `create_challenge`, then `decode_payload` and `verify_
   cache;
 - renders `Idle` first everywhere, so SSR and hydration match.
 
-## Cloudflare Workers
-
-`altcha`'s `solve_challenge` and `verify_solution` read std clocks, which panic on `wasm32-unknown-unknown`. To
-verify on Cloudflare Workers, patch in [altcha-org/altcha-lib-rs#1](https://github.com/altcha-org/altcha-lib-rs/pull/1)
-until it's released (see the [repository README](https://github.com/sagikazarmark/altcha-rs/blob/main/README.md#cloudflare-workers)).
-
 ## Demo
 
 [`demo`](https://github.com/sagikazarmark/altcha-rs/tree/main/demo) is the whole thing as a Dioxus fullstack app. Server functions issue and verify, and the page

@@ -31,10 +31,9 @@
 //! redeemed solution is spent, so cheap checks that could refuse the request
 //! go first too.
 //!
-//! On `wasm32-unknown-unknown` (Cloudflare Workers), `altcha`'s
-//! `verify_solution` reads std clocks, which panic there, until
-//! altcha-org/altcha-lib-rs#1 is released: patch it in meanwhile. This crate's
-//! own clock reads use `web-time`.
+//! On `wasm32-unknown-unknown` (Cloudflare Workers), where std clocks panic,
+//! this crate reads the clock from `Date.now()` and turns on `altcha`'s `js`
+//! feature, which does the same.
 //!
 //! # Features
 //!
@@ -356,10 +355,23 @@ pub enum DecodeError {
 }
 
 /// Unix seconds.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 fn now() -> i64 {
-    web_time::SystemTime::now()
-        .duration_since(web_time::UNIX_EPOCH)
+    std::time::SystemTime::now()
+        .duration_since(std::time::UNIX_EPOCH)
         .map_or(0, |d| d.as_secs().cast_signed())
+}
+
+/// Unix seconds, from `Date.now()`: std clocks panic on
+/// `wasm32-unknown-unknown`.
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+fn now() -> i64 {
+    #[expect(
+        clippy::cast_possible_truncation,
+        reason = "whole seconds, far below 2^63"
+    )]
+    let secs = (js_sys::Date::now().max(0.0) / 1000.0) as i64;
+    secs
 }
 
 #[cfg(test)]

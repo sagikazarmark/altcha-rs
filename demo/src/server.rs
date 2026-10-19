@@ -53,7 +53,7 @@ mod imp {
             .filter(|k| !k.is_empty())
             .unwrap_or_else(|| {
                 let mut bytes = [0u8; 32];
-                getrandom::getrandom(&mut bytes).expect("the OS has randomness");
+                getrandom::fill(&mut bytes).expect("the OS has randomness");
                 bytes.iter().map(|b| format!("{b:02x}")).collect()
             })
     });
