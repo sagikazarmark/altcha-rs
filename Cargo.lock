@@ -5,8 +5,7 @@ version = 4
 [[package]]
 name = "altcha"
 version = "1.0.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f7899562343c59a891dc9bfcbed6f2c5d610c01c6b82f72d22bb8dcf0cccf9fd"
+source = "git+https://github.com/sagikazarmark/altcha-lib-rs?rev=d2f9476826fe0965d687bed142e920ca2b91430a#d2f9476826fe0965d687bed142e920ca2b91430a"
 dependencies = [
  "digest",
  "hex",
@@ -18,6 +17,7 @@ dependencies = [
  "sha2",
  "subtle",
  "thiserror",
+ "web-time",
 ]
 
 [[package]]
