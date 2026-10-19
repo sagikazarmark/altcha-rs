@@ -10,20 +10,11 @@ license = "MIT OR Apache-2.0"
 repository = "https://github.com/sagikazarmark/altcha-rs"
 
 [workspace.dependencies]
-altcha = "1.0.0"
+altcha = "1.1.0"
 base64 = "0.23.1"
-# `altcha` uses rand 0.8's thread_rng, which needs getrandom 0.2's JS backend
-# to build for wasm32-unknown-unknown.
-getrandom = { version = "0.2.17", features = ["js"] }
 serde_json = "1.0.154"
 thiserror = "2.0.21"
 tokio = "1.53.2"
-
-# altcha's solve_challenge and verify_solution read std clocks, which panic on
-# wasm32-unknown-unknown, where the browser tests (wasm_solve) verify. This
-# uses web-time (altcha-org/altcha-lib-rs#1). Drop it once released.
-[patch.crates-io]
-altcha = { git = "https://github.com/sagikazarmark/altcha-lib-rs", rev = "d2f9476826fe0965d687bed142e920ca2b91430a" }
 
 [workspace.lints.rust]
 missing_docs = "warn"

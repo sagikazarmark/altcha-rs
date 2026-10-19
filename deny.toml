@@ -19,5 +19,3 @@ wildcards = "warn"
 [sources]
 unknown-registry = "deny"
 unknown-git = "deny"
-# The workspace's altcha patch (see Cargo.toml). Drop it with the patch.
-allow-git = ["https://github.com/sagikazarmark/altcha-lib-rs"]
